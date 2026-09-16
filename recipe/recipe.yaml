@@ -2,15 +2,15 @@ schema_version: 1
 
 context:
   name: ptflops
-  version: "0.7.3"
+  version: "0.7.5"
 
 package:
   name: ${{ name|lower }}
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: 59c0af2505255108df019674fb805eb61178f0baad6515720bb30dcb29592071
+  url: https://github.com/sovrasov/flops-counter.pytorch/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 6ce542c0bb6c19dcac9907ebca9e59ce2f254eac945cd1e1a89066a21494dc09
 
 build:
   number: 0
@@ -33,6 +33,14 @@ tests:
       python_version:
         - "${{ python_min }}.*"
         - "*"
+  - script:
+      - pytest -vvv tests/common_test.py
+    requirements:
+      run:
+        - pytest
+    files:
+      source:
+        - tests/
 
 about:
   summary: This tool is designed to compute the theoretical amount of multiply-add operations in neural networks.
