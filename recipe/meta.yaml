@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 59c0af2505255108df019674fb805eb61178f0baad6515720bb30dcb29592071
 
 build:
@@ -17,15 +17,16 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - pytorch
 test:
   imports:
     - ptflops
   requires:
     - pip
+    - python {{ python_min }}
   commands:
     - pip check
 
